@@ -1,4 +1,4 @@
-// Generated from ../typedef_dsl.g4 by ANTLR 4.7.2
+// Generated from ./typedef_dsl.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -16,10 +16,10 @@ public class typedef_dslParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		NUMBER=1, STRING_LITERAL=2, WS=3, NEWLINE=4, TYPE_LITERAL=5, TYPE_CONTEXTABLE=6, 
-		STRUCT=7, VARIABLE_NAME_SEPERATOR=8, VARIABLE_NAME=9, OPEN_PAREN=10, CLOSE_PAREN=11, 
-		OPEN_BRACKET=12, CLOSE_BRACKET=13, KEY_SEPERATOR=14, VALUE_SEPERATOR=15, 
-		END_OF_STATEMENT=16, OPEN_CONTEXT=17, CLOSE_CONTEXT=18;
+		NUMBER=1, STRING_LITERAL=2, WS=3, NEWLINE=4, BOOLEAN_VALUE=5, TYPE_LITERAL=6, 
+		TYPE_CONTEXTABLE=7, STRUCT=8, VARIABLE_NAME_SEPERATOR=9, VARIABLE_NAME=10, 
+		OPEN_PAREN=11, CLOSE_PAREN=12, OPEN_BRACKET=13, CLOSE_BRACKET=14, KEY_SEPERATOR=15, 
+		VALUE_SEPERATOR=16, END_OF_STATEMENT=17, OPEN_CONTEXT=18, CLOSE_CONTEXT=19;
 	public static final int
 		RULE_statements = 0, RULE_literal_statement = 1, RULE_phrase = 2, RULE_type_decl = 3, 
 		RULE_type_with_context = 4, RULE_type_context = 5, RULE_value = 6, RULE_nested_value = 7, 
@@ -35,17 +35,17 @@ public class typedef_dslParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, "'struct'", "'->'", null, "'('", 
-			"')'", "'{'", "'}'", "':'", "','", "';'", "'<'", "'>'"
+			null, null, null, null, null, null, null, null, "'struct'", "'->'", null, 
+			"'('", "')'", "'{'", "'}'", "':'", "','", "';'", "'<'", "'>'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "NUMBER", "STRING_LITERAL", "WS", "NEWLINE", "TYPE_LITERAL", "TYPE_CONTEXTABLE", 
-			"STRUCT", "VARIABLE_NAME_SEPERATOR", "VARIABLE_NAME", "OPEN_PAREN", "CLOSE_PAREN", 
-			"OPEN_BRACKET", "CLOSE_BRACKET", "KEY_SEPERATOR", "VALUE_SEPERATOR", 
-			"END_OF_STATEMENT", "OPEN_CONTEXT", "CLOSE_CONTEXT"
+			null, "NUMBER", "STRING_LITERAL", "WS", "NEWLINE", "BOOLEAN_VALUE", "TYPE_LITERAL", 
+			"TYPE_CONTEXTABLE", "STRUCT", "VARIABLE_NAME_SEPERATOR", "VARIABLE_NAME", 
+			"OPEN_PAREN", "CLOSE_PAREN", "OPEN_BRACKET", "CLOSE_BRACKET", "KEY_SEPERATOR", 
+			"VALUE_SEPERATOR", "END_OF_STATEMENT", "OPEN_CONTEXT", "CLOSE_CONTEXT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -212,13 +212,13 @@ public class typedef_dslParser extends Parser {
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public TerminalNode STRUCT() { return getToken(typedef_dslParser.STRUCT, 0); }
-		public Struct_membersContext struct_members() {
-			return getRuleContext(Struct_membersContext.class,0);
-		}
 		public List<TerminalNode> WS() { return getTokens(typedef_dslParser.WS); }
 		public TerminalNode WS(int i) {
 			return getToken(typedef_dslParser.WS, i);
+		}
+		public TerminalNode STRUCT() { return getToken(typedef_dslParser.STRUCT, 0); }
+		public Struct_membersContext struct_members() {
+			return getRuleContext(Struct_membersContext.class,0);
 		}
 		public PhraseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -239,13 +239,12 @@ public class typedef_dslParser extends Parser {
 		enterRule(_localctx, 4, RULE_phrase);
 		int _la;
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
 			setState(45);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TYPE_LITERAL:
 			case TYPE_CONTEXTABLE:
+				enterOuterAlt(_localctx, 1);
 				{
 				{
 				setState(34);
@@ -270,6 +269,7 @@ public class typedef_dslParser extends Parser {
 				}
 				break;
 			case STRUCT:
+				enterOuterAlt(_localctx, 2);
 				{
 				{
 				setState(43);
@@ -281,7 +281,6 @@ public class typedef_dslParser extends Parser {
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -318,18 +317,18 @@ public class typedef_dslParser extends Parser {
 		Type_declContext _localctx = new Type_declContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_type_decl);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
 			setState(49);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TYPE_CONTEXTABLE:
+				enterOuterAlt(_localctx, 1);
 				{
 				setState(47);
 				type_with_context();
 				}
 				break;
 			case TYPE_LITERAL:
+				enterOuterAlt(_localctx, 2);
 				{
 				setState(48);
 				match(TYPE_LITERAL);
@@ -337,7 +336,6 @@ public class typedef_dslParser extends Parser {
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -463,6 +461,7 @@ public class typedef_dslParser extends Parser {
 	}
 
 	public static class ValueContext extends ParserRuleContext {
+		public TerminalNode BOOLEAN_VALUE() { return getToken(typedef_dslParser.BOOLEAN_VALUE, 0); }
 		public TerminalNode NUMBER() { return getToken(typedef_dslParser.NUMBER, 0); }
 		public TerminalNode STRING_LITERAL() { return getToken(typedef_dslParser.STRING_LITERAL, 0); }
 		public Nested_valueContext nested_value() {
@@ -486,32 +485,39 @@ public class typedef_dslParser extends Parser {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_value);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(68);
+			setState(69);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case NUMBER:
+			case BOOLEAN_VALUE:
+				enterOuterAlt(_localctx, 1);
 				{
 				setState(65);
+				match(BOOLEAN_VALUE);
+				}
+				break;
+			case NUMBER:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(66);
 				match(NUMBER);
 				}
 				break;
 			case STRING_LITERAL:
+				enterOuterAlt(_localctx, 3);
 				{
-				setState(66);
+				setState(67);
 				match(STRING_LITERAL);
 				}
 				break;
 			case OPEN_BRACKET:
+				enterOuterAlt(_localctx, 4);
 				{
-				setState(67);
+				setState(68);
 				nested_value();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -558,38 +564,38 @@ public class typedef_dslParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(71);
 			match(OPEN_BRACKET);
-			setState(74);
+			setState(75);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(71);
+				setState(72);
 				value();
 				}
 				break;
 			case 2:
 				{
-				setState(72);
+				setState(73);
 				multiple_values();
 				}
 				break;
 			case 3:
 				{
-				setState(73);
+				setState(74);
 				key_value_pair();
 				}
 				break;
 			}
-			setState(76);
+			setState(77);
 			match(CLOSE_BRACKET);
-			setState(78);
+			setState(79);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				{
-				setState(77);
+				setState(78);
 				match(VALUE_SEPERATOR);
 				}
 				break;
@@ -639,21 +645,21 @@ public class typedef_dslParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(80);
+			setState(81);
 			value();
-			setState(85);
+			setState(86);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==VALUE_SEPERATOR) {
 				{
 				{
-				setState(81);
-				match(VALUE_SEPERATOR);
 				setState(82);
+				match(VALUE_SEPERATOR);
+				setState(83);
 				value();
 				}
 				}
-				setState(87);
+				setState(88);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -698,11 +704,11 @@ public class typedef_dslParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
-			value();
 			setState(89);
-			match(KEY_SEPERATOR);
+			value();
 			setState(90);
+			match(KEY_SEPERATOR);
+			setState(91);
 			value();
 			}
 		}
@@ -755,43 +761,43 @@ public class typedef_dslParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
-			match(OPEN_BRACKET);
 			setState(93);
-			match(VARIABLE_NAME);
+			match(OPEN_BRACKET);
 			setState(94);
+			match(VARIABLE_NAME);
+			setState(95);
 			type_decl();
-			setState(104);
+			setState(105);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(96); 
+				setState(97); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(95);
+					setState(96);
 					match(NEWLINE);
 					}
 					}
-					setState(98); 
+					setState(99); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==NEWLINE );
-				setState(100);
-				match(VARIABLE_NAME);
 				setState(101);
+				match(VARIABLE_NAME);
+				setState(102);
 				type_decl();
 				}
 				}
-				setState(106);
+				setState(107);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(107);
+			setState(108);
 			match(CLOSE_BRACKET);
 			}
 		}
@@ -807,33 +813,33 @@ public class typedef_dslParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\24p\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\25q\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
 		"\f\t\f\3\2\6\2\32\n\2\r\2\16\2\33\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\4\3\4"+
 		"\7\4\'\n\4\f\4\16\4*\13\4\3\4\3\4\3\4\3\4\5\4\60\n\4\3\5\3\5\5\5\64\n"+
 		"\5\3\6\3\6\3\6\3\7\3\7\3\7\3\7\7\7=\n\7\f\7\16\7@\13\7\3\7\3\7\3\b\3\b"+
-		"\3\b\5\bG\n\b\3\t\3\t\3\t\3\t\5\tM\n\t\3\t\3\t\5\tQ\n\t\3\n\3\n\3\n\7"+
-		"\nV\n\n\f\n\16\nY\13\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\6\fc\n\f\r"+
-		"\f\16\fd\3\f\3\f\7\fi\n\f\f\f\16\fl\13\f\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f"+
-		"\16\20\22\24\26\2\2\2q\2\31\3\2\2\2\4\37\3\2\2\2\6/\3\2\2\2\b\63\3\2\2"+
-		"\2\n\65\3\2\2\2\f8\3\2\2\2\16F\3\2\2\2\20H\3\2\2\2\22R\3\2\2\2\24Z\3\2"+
-		"\2\2\26^\3\2\2\2\30\32\5\4\3\2\31\30\3\2\2\2\32\33\3\2\2\2\33\31\3\2\2"+
-		"\2\33\34\3\2\2\2\34\35\3\2\2\2\35\36\7\2\2\3\36\3\3\2\2\2\37 \7\13\2\2"+
-		" !\7\n\2\2!\"\5\6\4\2\"#\7\22\2\2#\5\3\2\2\2$(\5\b\5\2%\'\7\5\2\2&%\3"+
-		"\2\2\2\'*\3\2\2\2(&\3\2\2\2()\3\2\2\2)+\3\2\2\2*(\3\2\2\2+,\5\16\b\2,"+
-		"\60\3\2\2\2-.\7\t\2\2.\60\5\26\f\2/$\3\2\2\2/-\3\2\2\2\60\7\3\2\2\2\61"+
-		"\64\5\n\6\2\62\64\7\7\2\2\63\61\3\2\2\2\63\62\3\2\2\2\64\t\3\2\2\2\65"+
-		"\66\7\b\2\2\66\67\5\f\7\2\67\13\3\2\2\289\7\23\2\29>\5\b\5\2:;\7\21\2"+
-		"\2;=\5\b\5\2<:\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?A\3\2\2\2@>\3\2\2"+
-		"\2AB\7\24\2\2B\r\3\2\2\2CG\7\3\2\2DG\7\4\2\2EG\5\20\t\2FC\3\2\2\2FD\3"+
-		"\2\2\2FE\3\2\2\2G\17\3\2\2\2HL\7\16\2\2IM\5\16\b\2JM\5\22\n\2KM\5\24\13"+
-		"\2LI\3\2\2\2LJ\3\2\2\2LK\3\2\2\2MN\3\2\2\2NP\7\17\2\2OQ\7\21\2\2PO\3\2"+
-		"\2\2PQ\3\2\2\2Q\21\3\2\2\2RW\5\16\b\2ST\7\21\2\2TV\5\16\b\2US\3\2\2\2"+
-		"VY\3\2\2\2WU\3\2\2\2WX\3\2\2\2X\23\3\2\2\2YW\3\2\2\2Z[\5\16\b\2[\\\7\20"+
-		"\2\2\\]\5\16\b\2]\25\3\2\2\2^_\7\16\2\2_`\7\13\2\2`j\5\b\5\2ac\7\6\2\2"+
-		"ba\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2ef\3\2\2\2fg\7\13\2\2gi\5\b\5"+
-		"\2hb\3\2\2\2il\3\2\2\2jh\3\2\2\2jk\3\2\2\2km\3\2\2\2lj\3\2\2\2mn\7\17"+
-		"\2\2n\27\3\2\2\2\r\33(/\63>FLPWdj";
+		"\3\b\3\b\5\bH\n\b\3\t\3\t\3\t\3\t\5\tN\n\t\3\t\3\t\5\tR\n\t\3\n\3\n\3"+
+		"\n\7\nW\n\n\f\n\16\nZ\13\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\6\fd\n"+
+		"\f\r\f\16\fe\3\f\3\f\7\fj\n\f\f\f\16\fm\13\f\3\f\3\f\3\f\2\2\r\2\4\6\b"+
+		"\n\f\16\20\22\24\26\2\2\2s\2\31\3\2\2\2\4\37\3\2\2\2\6/\3\2\2\2\b\63\3"+
+		"\2\2\2\n\65\3\2\2\2\f8\3\2\2\2\16G\3\2\2\2\20I\3\2\2\2\22S\3\2\2\2\24"+
+		"[\3\2\2\2\26_\3\2\2\2\30\32\5\4\3\2\31\30\3\2\2\2\32\33\3\2\2\2\33\31"+
+		"\3\2\2\2\33\34\3\2\2\2\34\35\3\2\2\2\35\36\7\2\2\3\36\3\3\2\2\2\37 \7"+
+		"\f\2\2 !\7\13\2\2!\"\5\6\4\2\"#\7\23\2\2#\5\3\2\2\2$(\5\b\5\2%\'\7\5\2"+
+		"\2&%\3\2\2\2\'*\3\2\2\2(&\3\2\2\2()\3\2\2\2)+\3\2\2\2*(\3\2\2\2+,\5\16"+
+		"\b\2,\60\3\2\2\2-.\7\n\2\2.\60\5\26\f\2/$\3\2\2\2/-\3\2\2\2\60\7\3\2\2"+
+		"\2\61\64\5\n\6\2\62\64\7\b\2\2\63\61\3\2\2\2\63\62\3\2\2\2\64\t\3\2\2"+
+		"\2\65\66\7\t\2\2\66\67\5\f\7\2\67\13\3\2\2\289\7\24\2\29>\5\b\5\2:;\7"+
+		"\22\2\2;=\5\b\5\2<:\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?A\3\2\2\2@>"+
+		"\3\2\2\2AB\7\25\2\2B\r\3\2\2\2CH\7\7\2\2DH\7\3\2\2EH\7\4\2\2FH\5\20\t"+
+		"\2GC\3\2\2\2GD\3\2\2\2GE\3\2\2\2GF\3\2\2\2H\17\3\2\2\2IM\7\17\2\2JN\5"+
+		"\16\b\2KN\5\22\n\2LN\5\24\13\2MJ\3\2\2\2MK\3\2\2\2ML\3\2\2\2NO\3\2\2\2"+
+		"OQ\7\20\2\2PR\7\22\2\2QP\3\2\2\2QR\3\2\2\2R\21\3\2\2\2SX\5\16\b\2TU\7"+
+		"\22\2\2UW\5\16\b\2VT\3\2\2\2WZ\3\2\2\2XV\3\2\2\2XY\3\2\2\2Y\23\3\2\2\2"+
+		"ZX\3\2\2\2[\\\5\16\b\2\\]\7\21\2\2]^\5\16\b\2^\25\3\2\2\2_`\7\17\2\2`"+
+		"a\7\f\2\2ak\5\b\5\2bd\7\6\2\2cb\3\2\2\2de\3\2\2\2ec\3\2\2\2ef\3\2\2\2"+
+		"fg\3\2\2\2gh\7\f\2\2hj\5\b\5\2ic\3\2\2\2jm\3\2\2\2ki\3\2\2\2kl\3\2\2\2"+
+		"ln\3\2\2\2mk\3\2\2\2no\7\20\2\2o\27\3\2\2\2\r\33(/\63>GMQXek";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
