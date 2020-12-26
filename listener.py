@@ -3,7 +3,7 @@ from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .typedef_dslParser import typedef_dslParser
 else:
-    from typedef_dslParser import typedef_dslParser
+    from generated_antlr.typedef_dslParser import typedef_dslParser
 
 # This class defines a complete listener for a parse tree produced by typedef_dslParser.
 class TopLevelListener(ParseTreeListener):

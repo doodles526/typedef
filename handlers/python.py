@@ -17,7 +17,6 @@ class PythonHandler:
 
     def endLiteral(self):
         self.outputs.append(self.current_literal + self.value_stack[0][0])
-        print(self.outputs[0])
 #        print(self.current_literal)
  #       print(self.value_stack[0][0])
 

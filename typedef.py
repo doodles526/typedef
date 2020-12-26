@@ -1,9 +1,9 @@
 #!/bin/python
 import sys
 from antlr4 import *
-from typedef_dslLexer import typedef_dslLexer
-from typedef_dslParser import typedef_dslParser
-from typedef_dslListener import TopLevelListener
+from generated_antlr.typedef_dslLexer import typedef_dslLexer
+from generated_antlr.typedef_dslParser import typedef_dslParser
+from listener import TopLevelListener
 from handlers.python import PythonHandler
 
 def main(argv):
