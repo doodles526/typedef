@@ -8,7 +8,7 @@ class PythonHandler:
         self.outputs = []
 
     def endNewInputs(self):
-        print(self.outputs)
+        print(self.outputs[0])
         pass
 
     def beginLiteral(self):
@@ -83,42 +83,24 @@ class PythonHandler:
     def endMultipleValues(self):
         vals = self.value_stack.pop()
 
-#        self.value_stack[-1] = "\n" + self.value_stack[-1] + ",".join(vals)
         self.value_stack[-1] += ",".join(vals)
 
 
-"""
 
-    # Enter a parse tree produced by typedef_dslParser#key_value_pair.
-    def enterKey_value_pair(self, ctx:typedef_dslParser.Key_value_pairContext):
-        for handler in self.handlers:
-            handler.setKeyValueMode()
+    def beginKeyValue(self):
+        pass
 
-    # Exit a parse tree produced by typedef_dslParser#key_value_pair.
-    def exitKey_value_pair(self, ctx:typedef_dslParser.Key_value_pairContext):
-        for handler in self.handlers:
-            handler.unsetKeyValueMode()
+    def endKeyValue(self):
+        pass
 
+    def beginKVKey(self):
+        pass
 
-    # Enter a parse tree produced by typedef_dslParser#map_kv_key.
-    def enterMap_kv_key(self, ctx:typedef_dslParser.Map_kv_keyContext):
-        for handler in self.handlers:
-            handler.beginKVKey()
+    def endKVKey(self):
+        pass
 
-    # Exit a parse tree produced by typedef_dslParser#map_kv_key.
-    def exitMap_kv_key(self, ctx:typedef_dslParser.Map_kv_keyContext):
-        for handler in self.handlers:
-            handler.endKVKey()
+    def beginKVValue(self):
+        pass
 
-    # Enter a parse tree produced by typedef_dslParser#map_kv_value.
-    def enterMap_kv_value(self, ctx:typedef_dslParser.Map_kv_valueContext):
-        for handler in self.handlers:
-            handler.beginKVValue()
-
-    # Exit a parse tree produced by typedef_dslParser#map_kv_value.
-    def exitMap_kv_value(self, ctx:typedef_dslParser.Map_kv_valueContext):
-        for handler in self.handlers:
-            handler.endKVValue()
-            """
-
-
+    def endKVValue(self):
+        pass
