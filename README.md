@@ -51,8 +51,7 @@ later.
 
 ## How to use
 
-Currently, only basic use if finished. The Python handler is complete except
-for dicts - but it should be abstracted more so we don't have to hard-code all the
+Currently, only basic use if finished. The Python handler is complete - but it should be abstracted more so we don't have to hard-code all the
 languages - and instead describe prefix/suffix notations for various types.
 
 ```

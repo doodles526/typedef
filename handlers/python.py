@@ -72,7 +72,7 @@ class PythonHandler:
 
     def endMapValue(self):
         contents = self.value_stack.pop()
-        self.value_stack[-1].append(contents + "}")
+        self.value_stack[-1].append(contents[:-1] + "}")
 
 
     def beginMultipleValues(self):
@@ -88,19 +88,25 @@ class PythonHandler:
 
 
     def beginKeyValue(self):
-        pass
+        self.value_stack.append([])
 
     def endKeyValue(self):
-        pass
+        kv = self.value_stack.pop()
+        print(kv[0])
+        print(self.value_stack)
+        self.value_stack[-1] += kv[0][0] + ": " + kv[1][0] + ","
 
     def beginKVKey(self):
-        pass
+        self.value_stack.append([])
+
 
     def endKVKey(self):
-        pass
+        contents = self.value_stack.pop()
+        self.value_stack[-1].append(contents)
 
     def beginKVValue(self):
-        pass
+        self.value_stack.append([])
 
     def endKVValue(self):
-        pass
+        contents = self.value_stack.pop()
+        self.value_stack[-1].append(contents)
