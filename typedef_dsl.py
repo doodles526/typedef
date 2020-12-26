@@ -3,7 +3,8 @@ import sys
 from antlr4 import *
 from typedef_dslLexer import typedef_dslLexer
 from typedef_dslParser import typedef_dslParser
-from typedefListener import TypedefListener
+from typedef_dslListener import TopLevelListener
+from handlers.python import PythonHandler
 
 def main(argv):
     rawStream = FileStream(argv[1])
@@ -12,13 +13,11 @@ def main(argv):
     parser = typedef_dslParser(stream)
     tree = parser.statements()
 
-    output = open("output.txt", "w")
 
-    l = TypedefListener(output)
+    l = TopLevelListener([PythonHandler()])
     walker = ParseTreeWalker()
     walker.walk(l, tree)
 
-    output.close()
 
 if __name__ == "__main__":
     main(sys.argv)

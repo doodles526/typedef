@@ -12,43 +12,47 @@ literal_statement
 	;
 
 phrase 
-	: (type_decl WS* value) 
-	| (STRUCT struct_members) 
+	: (type_decl WS* value) #valuePhrase
+	| (STRUCT struct_members) #structPhrase
 	;
 
 // type definitions
 type_decl
-	: type_with_context 
-	| TYPE_LITERAL 
+	: TYPE_EMBEDDED OPEN_EMBEDDED type_decl (VALUE_SEPERATOR type_decl)* CLOSE_EMBEDDED #embeddedType
+	| TYPE_LITERAL #literalType
 	;
 
 
-type_with_context
-	: TYPE_CONTEXTABLE type_context 
-	;
-
-type_context
-	: OPEN_CONTEXT type_decl (VALUE_SEPERATOR type_decl)* CLOSE_CONTEXT ;
 
 
 // literal value definitions
 value
-	: BOOLEAN_VALUE 
-	| NUMBER 
-	| STRING_LITERAL 
-	| nested_value
+	: BOOLEAN_VALUE #booleanValue
+	| NUMBER #numberValue
+	| STRING_LITERAL #stringValue // TODO: Do better string parsing
+	| OPEN_SQUARE multiple_values? CLOSE_SQUARE VALUE_SEPERATOR? #arrayValue
+	| OPEN_BRACKET multiple_values? CLOSE_BRACKET VALUE_SEPERATOR? #setValue
+	| OPEN_BRACKET key_value_pair+ CLOSE_BRACKET VALUE_SEPERATOR? #mapValue
 	;
 
-nested_value
-	: OPEN_BRACKET (value | multiple_values | key_value_pair) CLOSE_BRACKET VALUE_SEPERATOR?
-	;
 
 multiple_values
 	: value (VALUE_SEPERATOR value)* 
 	;
 
 key_value_pair
-	: value KEY_SEPERATOR value
+	: map_kv_key KEY_SEPERATOR map_kv_value VALUE_SEPERATOR?
+	;
+
+
+// Arrange key/vals like this to make easier flagging to handlers
+map_kv_key
+	: value
+	;
+
+// Arrange key/vals like this to make easier flagging to handlers
+map_kv_value
+	: value
 	;
 
 struct_members
@@ -117,9 +121,9 @@ TYPE_LITERAL
 	: INT_TYPE 
 	| STRING_TYPE 
 	| BOOLEAN_TYPE 
-	| FLOAT 
+	| FLOAT_TYPE
 	;
-TYPE_CONTEXTABLE
+TYPE_EMBEDDED
 	: SET_TYPE 
 	| MAP_TYPE 
 	| ARRAY_TYPE 
@@ -158,7 +162,7 @@ VARIABLE_NAME_SEPERATOR
 	: '->' 
 	;
 
-// mandate lower-case beginning with Camel Case
+// mandate lower-case beginning with Camel Case?
 VARIABLE_NAME
 	: 'a'..'z' 
 	| ('a'..'z' (ALPHA_NUMERIC | '-' | '_')* ALPHA_NUMERIC ) 
@@ -186,6 +190,13 @@ CLOSE_BRACKET
 	: '}' 
 	;
 
+OPEN_SQUARE
+	: '[' 
+	;
+CLOSE_SQUARE
+	: ']' 
+	;
+
 KEY_SEPERATOR
 	: ':' 
 	;
@@ -198,9 +209,9 @@ END_OF_STATEMENT
 	: ';' 
 	;
 
-OPEN_CONTEXT
+OPEN_EMBEDDED
 	: '<' 
 	;
-CLOSE_CONTEXT
+CLOSE_EMBEDDED
 	: '>' 
 	;
