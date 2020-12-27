@@ -41,6 +41,7 @@ class ImplicitTypeHandler:
     def keyValueSeparator(self):
         pass
 
+
     def __init__(self):
         self.outputs = []
         self.value_stack = [[]]
@@ -131,9 +132,7 @@ class ImplicitTypeHandler:
 
     def endKeyValue(self):
         kv = self.value_stack.pop()
-        print(kv[0])
-        print(self.value_stack)
-        self.value_stack[-1] += kv[0][0] + self.keyValueSeparator() + kv[1][0] + self.multiValueSeparator()
+        self.value_stack[-1] += self.keyValueStartString() + kv[0][0] + self.keyValueSeparator() + kv[1][0] + self.keyValueEndString() + self.multiValueSeparator()
 
     def beginKVKey(self):
         self.value_stack.append([])
