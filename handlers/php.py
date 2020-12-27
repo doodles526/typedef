@@ -1,8 +1,11 @@
 from .implicit_type import ImplicitTypeHandler
 
-class PythonHandler(ImplicitTypeHandler):
+class PHPHandler(ImplicitTypeHandler):
 
     def booleanRepr(self, bool_val):
+        if bool_val:
+            return "TRUE"
+        return "FALSE"
         return str(bool_val)
 
     def numberRepr(self, number_string):
@@ -12,7 +15,7 @@ class PythonHandler(ImplicitTypeHandler):
         return "\"" + string_without_quotes + "\""
 
     def createFullOutputString(self, variable_name, value):
-        return variable_name + " = " + value
+        return "$" + variable_name + " = " + value + ";"
 
     def arrayStartString(self):
         return "["
@@ -21,16 +24,17 @@ class PythonHandler(ImplicitTypeHandler):
         return "]"
 
     def setStartString(self):
-        return "set("
+        print("Sets not available within PHP - reverting to array")
+        return "["
 
     def setEndString(self):
-        return ")"
+        return "]"
 
     def mapStartString(self):
-        return "{"
+        return "["
 
     def mapEndString(self):
-        return "}"
+        return "]"
 
     def keyValueStartString(self):
         return ""
@@ -42,5 +46,5 @@ class PythonHandler(ImplicitTypeHandler):
         return ","
 
     def keyValueSeparator(self):
-        return ": "
+        return " => "
 

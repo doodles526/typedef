@@ -1,9 +1,12 @@
 from .implicit_type import ImplicitTypeHandler
 
-class PythonHandler(ImplicitTypeHandler):
+class ClojureHandler(ImplicitTypeHandler):
 
     def booleanRepr(self, bool_val):
-        return str(bool_val)
+        if bool_val:
+            return "true"
+        return "false"
+
 
     def numberRepr(self, number_string):
         return number_string
@@ -12,7 +15,7 @@ class PythonHandler(ImplicitTypeHandler):
         return "\"" + string_without_quotes + "\""
 
     def createFullOutputString(self, variable_name, value):
-        return variable_name + " = " + value
+        return "(def " + variable_name + " " + value + ")"
 
     def arrayStartString(self):
         return "["
@@ -21,10 +24,10 @@ class PythonHandler(ImplicitTypeHandler):
         return "]"
 
     def setStartString(self):
-        return "set("
+        return "#{"
 
     def setEndString(self):
-        return ")"
+        return "}"
 
     def mapStartString(self):
         return "{"
@@ -42,5 +45,5 @@ class PythonHandler(ImplicitTypeHandler):
         return ","
 
     def keyValueSeparator(self):
-        return ": "
+        return " "
 

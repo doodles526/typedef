@@ -4,7 +4,7 @@ from antlr4 import *
 from generated_antlr.typedef_dslLexer import typedef_dslLexer
 from generated_antlr.typedef_dslParser import typedef_dslParser
 from listener import TopLevelListener
-from handlers.python import PythonHandler
+from handlers.clojure import ClojureHandler
 
 def main(argv):
     rawStream = FileStream(argv[1])
@@ -14,7 +14,7 @@ def main(argv):
     tree = parser.statements()
 
 
-    l = TopLevelListener([PythonHandler()])
+    l = TopLevelListener([ClojureHandler()])
     walker = ParseTreeWalker()
     walker.walk(l, tree)
 

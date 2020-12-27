@@ -1,9 +1,11 @@
 from .implicit_type import ImplicitTypeHandler
 
-class PythonHandler(ImplicitTypeHandler):
+class RubyHandler(ImplicitTypeHandler):
 
     def booleanRepr(self, bool_val):
-        return str(bool_val)
+        if bool_val:
+            return "true"
+        return "false"
 
     def numberRepr(self, number_string):
         return number_string
@@ -21,10 +23,10 @@ class PythonHandler(ImplicitTypeHandler):
         return "]"
 
     def setStartString(self):
-        return "set("
+        return "Set["
 
     def setEndString(self):
-        return ")"
+        return "]"
 
     def mapStartString(self):
         return "{"
@@ -42,5 +44,5 @@ class PythonHandler(ImplicitTypeHandler):
         return ","
 
     def keyValueSeparator(self):
-        return ": "
+        return " => "
 
