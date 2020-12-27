@@ -51,7 +51,8 @@ class ImplicitTypeHandler:
         self.outputs = []
 
     def endNewInputs(self):
-        print(self.outputs)
+        for output in self.outputs:
+            print(output)
 
     def beginLiteral(self):
         self.value_stack = [[]]
