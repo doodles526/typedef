@@ -2,6 +2,18 @@ from .implicit_type import ImplicitTypeHandler
 
 class RubyHandler(ImplicitTypeHandler):
 
+    def __init__(self):
+        super().__init__()
+        self.requireSetImport = False
+
+    def header(self):
+        header = "# Ruby"
+
+        if self.requireSetImport:
+            header += "\nrequire 'set'\n"
+
+        return header
+
     def booleanRepr(self, bool_val):
         if bool_val:
             return "true"
@@ -23,6 +35,7 @@ class RubyHandler(ImplicitTypeHandler):
         return "]"
 
     def setStartString(self):
+        self.requireSetImport = True
         return "Set["
 
     def setEndString(self):

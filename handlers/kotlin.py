@@ -1,15 +1,15 @@
 from .implicit_type import ImplicitTypeHandler
 
-class PHPHandler(ImplicitTypeHandler):
+class KotlinHandler(ImplicitTypeHandler):
 
     def header(self):
-        return "# PHP"
+        return "# Kotlin"
 
     def booleanRepr(self, bool_val):
         if bool_val:
-            return "TRUE"
-        return "FALSE"
-        return str(bool_val)
+            return "true"
+        return "false"
+
 
     def numberRepr(self, number_string):
         return number_string
@@ -18,26 +18,25 @@ class PHPHandler(ImplicitTypeHandler):
         return "\"" + string_without_quotes + "\""
 
     def createFullOutputString(self, variable_name, value):
-        return "$" + variable_name + " = " + value + ";"
+        return "val " + variable_name + " = " + value
 
     def arrayStartString(self):
-        return "["
+        return "arrayOf("
 
     def arrayEndString(self):
-        return "]"
+        return ")"
 
     def setStartString(self):
-        print("Sets not available within PHP - reverting to array")
-        return "["
+        return "setOf("
 
     def setEndString(self):
-        return "]"
+        return ")"
 
     def mapStartString(self):
-        return "["
+        return "mapOf("
 
     def mapEndString(self):
-        return "]"
+        return ")"
 
     def keyValueStartString(self):
         return ""
@@ -49,5 +48,5 @@ class PHPHandler(ImplicitTypeHandler):
         return ","
 
     def keyValueSeparator(self):
-        return " => "
+        return " to "
 

@@ -2,6 +2,9 @@ from .implicit_type import ImplicitTypeHandler
 
 class FSharpHandler(ImplicitTypeHandler):
 
+    def header(self):
+        return "# F#"
+
     def booleanRepr(self, bool_val):
         if bool_val:
             return "true"

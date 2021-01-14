@@ -1,6 +1,9 @@
 from .implicit_type import ImplicitTypeHandler
 
-class JavascriptHandler(ImplicitTypeHandler):
+class JavaScriptHandler(ImplicitTypeHandler):
+
+    def header(self):
+        return "# JavaScript"
 
     def booleanRepr(self, bool_val):
         if bool_val:

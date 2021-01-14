@@ -2,6 +2,9 @@ from .implicit_type import ImplicitTypeHandler
 
 class LuaHandler(ImplicitTypeHandler):
 
+    def header(self):
+        return "# Lua"
+
     def booleanRepr(self, bool_val):
         if bool_val:
             return "true"
@@ -47,7 +50,6 @@ class LuaHandler(ImplicitTypeHandler):
     def keyValueSeparator(self):
         return " = "
 
-    # Lua maps are strange and require wrapping of keys in [] - so implementing custom KeyValue handler
     def endKeyValue(self):
         kv = self.value_stack.pop()
-        self.value_stack[-1] += self.keyValueStartString() + "[" + kv[0][0] + "]" + self.keyValueSeparator() + kv[1][0] + self.keyValueEndString() + self.multiValueSeparator()
+        self.value_stack[-1].append(self.keyValueStartString() + "[" + kv[0] + "]" + self.keyValueSeparator() + kv[1] + self.keyValueEndString())

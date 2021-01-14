@@ -2,6 +2,9 @@ from .implicit_type import ImplicitTypeHandler
 
 class ClojureHandler(ImplicitTypeHandler):
 
+    def header(self):
+        return "# Clojure"
+
     def booleanRepr(self, bool_val):
         if bool_val:
             return "true"

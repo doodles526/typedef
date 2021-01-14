@@ -2,6 +2,9 @@ from .implicit_type import ImplicitTypeHandler
 
 class PythonHandler(ImplicitTypeHandler):
 
+    def header(self):
+        return "# Python"
+
     def booleanRepr(self, bool_val):
         return str(bool_val)
 
@@ -21,10 +24,10 @@ class PythonHandler(ImplicitTypeHandler):
         return "]"
 
     def setStartString(self):
-        return "set("
+        return "{"
 
     def setEndString(self):
-        return ")"
+        return "}"
 
     def mapStartString(self):
         return "{"

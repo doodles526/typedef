@@ -4,7 +4,7 @@ from antlr4 import *
 from generated_antlr.typedef_dslLexer import typedef_dslLexer
 from generated_antlr.typedef_dslParser import typedef_dslParser
 from listener import TopLevelListener
-from handlers.clojure import ClojureHandler
+from handlers import ScalaHandler, ClojureHandler, FSharpHandler, HaskellHandler, JavaScriptHandler, LuaHandler, PHPHandler, RubyHandler, PythonHandler, CPPHandler, KotlinHandler
 
 def main(argv):
     rawStream = FileStream(argv[1])
@@ -13,11 +13,26 @@ def main(argv):
     parser = typedef_dslParser(stream)
     tree = parser.statements()
 
+    handlers = []
+    handlers.append(ScalaHandler())
+    handlers.append(ClojureHandler())
+    handlers.append(FSharpHandler())
+    handlers.append(HaskellHandler())
+    handlers.append(JavaScriptHandler())
+    handlers.append(LuaHandler())
+    handlers.append(PHPHandler())
+    handlers.append(RubyHandler())
+    handlers.append(PythonHandler())
+    handlers.append(CPPHandler())
+    handlers.append(KotlinHandler())
 
-    l = TopLevelListener([ClojureHandler()])
+    l = TopLevelListener(handlers)
     walker = ParseTreeWalker()
     walker.walk(l, tree)
 
+    for handler in handlers:
+        handler.printOutputs()
+        print("")
 
 if __name__ == "__main__":
     main(sys.argv)
