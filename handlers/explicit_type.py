@@ -9,11 +9,28 @@ class ExplicitTypeHandler:
     def booleanRepr(self, bool_val):
         return ""
 
-    def numberTypeString(self):
-        # TODO: Float vs int
+    def intTypeString(self):
         return ""
 
-    def numberRepr(self, number_string):
+    def intRepr(self, number_string):
+        return ""
+
+    def floatTypeString(self):
+        return ""
+
+    def floatRepr(self, number_string):
+        return ""
+
+    def binaryTypeString(self):
+        return ""
+
+    def binaryRepr(self, number_string):
+        return ""
+
+    def hexTypeString(self):
+        return ""
+
+    def hexRepr(self, number_string):
         return ""
 
     def stringTypeString(self):
@@ -127,8 +144,23 @@ class ExplicitTypeHandler:
         self.type_stack[-1].append(self.booleanTypeString())
 
     def setNumberValue(self, number_text):
-        self.value_stack[-1].append(self.numberRepr(number_text))
-        self.type_stack[-1].append(self.numberTypeString()) # TODO: Multiple number types
+        value = ""
+        type_str = ""
+        if "." in number_text:
+            value = self.floatRepr(number_text)
+            type_str = self.floatTypeString()
+        elif "b" in number_text:
+            value = self.binaryRepr(number_text)
+            type_str = self.binaryTypeString()
+        elif "x" in number_text:
+            value = self.hexRepr(number_text)
+            type_str = self.hexTypeString()
+        else:
+            value = self.intRepr(number_text)
+            type_str = self.intTypeString()
+
+        self.value_stack[-1].append(value)
+        self.type_stack[-1].append(type_str) # TODO: Multiple number types
 
     def setStringValue(self, string_without_quotes):
         self.value_stack[-1].append(self.stringRepr(string_without_quotes))
@@ -204,7 +236,7 @@ class ExplicitTypeHandler:
         self.value_stack[-1].append(self.keyValueStartString() + kv[0] + self.keyValueSeparator() + kv[1] + self.keyValueEndString())
         
         kv_type = self.type_stack.pop()
-        self.type_stack[-1].append(kv_type[0] + "," + kv_type[1])
+        self.type_stack[-1].append(kv_type[0] + self.keyValueSeparator() + kv_type[1])
 
     # No need to alter these. They are handled by individual values handlers
     def beginKVKey(self):

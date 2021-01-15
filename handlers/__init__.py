@@ -9,3 +9,4 @@ from .python import PythonHandler
 from .ruby import RubyHandler
 from .cpp import CPPHandler
 from .kotlin import KotlinHandler
+from .swift import SwiftHandler

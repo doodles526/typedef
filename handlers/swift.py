@@ -1,19 +1,10 @@
 from .explicit_type import ExplicitTypeHandler
 
-class CPPHandler(ExplicitTypeHandler):
+class SwiftHandler(ExplicitTypeHandler):
 
     def header(self):
-        header = "# C++"
+        header = "# Swift"
 
-        body = []
-        if self.requireSetImport:
-            body.append("#include <unordered_set>")
-        if self.requireMapImport:
-            body.append("#include <unordered_map>")
-
-        if len(body) > 0:
-            body.insert(0, header)
-            header = "\n".join(body)
         return header
 
     def booleanRepr(self, bool_val):
@@ -22,90 +13,88 @@ class CPPHandler(ExplicitTypeHandler):
         return "false"
 
     def booleanTypeString(self):
-        return "bool"
+        return "Bool"
 
     def intTypeString(self):
-        return "int"
+        return "Int"
 
     def intRepr(self, number_string):
         return number_string
 
     def floatTypeString(self):
-        return "float"
+        return "Float"
 
     def floatRepr(self, number_string):
         return number_string
 
     def binaryTypeString(self):
-        return "int"
+        return "Int"
 
     def binaryRepr(self, number_string):
         return number_string
 
     def hexTypeString(self):
-        return "int"
+        return "Int"
 
     def hexRepr(self, number_string):
-        return number_string
+        return number_String
 
     def stringRepr(self, string_without_quotes):
         return "\"" + string_without_quotes + "\""
 
     def stringTypeString(self):
-        return "string"
+        return "String"
 
     def createFullOutputString(self, type_str, variable_name, value):
-        return type_str + " " + variable_name + " = " + value + ";"
+        return "let " + variable_name + ": " + type_str + " = " + value + ";"
 
     def arrayStartString(self):
-        return "{"
+        return "["
 
     def arrayEndString(self):
-        return "}"
+        return "]"
 
     def arrayTypeStartString(self):
-        return "vector<"
+        return "["
 
     def arrayTypeEndString(self):
-        return ">"
+        return "]"
 
     def setStartString(self):
-        self.requireSetImport = True
-        return "{"
+        return "["
 
     def setEndString(self):
-        return "}"
+        return "]"
 
     def setTypeStartString(self):
-        return "unordered_set<"
+        return "Set<"
 
     def setTypeEndString(self):
         return ">"
 
     def mapStartString(self):
-        self.requireMapImport = True
-        return "{"
+        return "["
 
     def mapEndString(self):
-        return "}"
+        return "]"
 
     def mapTypeStartString(self):
-        return "unordered_map<"
+        return "["
 
     def mapTypeEndString(self):
-        return ">"
+        return "]"
 
     def keyValueStartString(self):
-        return "{"
+        return ""
 
     def keyValueEndString(self):
-        return "}"
+        return ""
 
     def multiValueSeparator(self):
         return ","
 
     def keyValueSeparator(self):
-        return ","
+        return ":"
 
     def printOutputs(self, with_header=True):
         print(self.header())
