@@ -116,7 +116,6 @@ class ExplicitTypeHandler:
         self.type_stack = [[]]
 
     def endLiteral(self):
-        print(self.type_stack)
         self.outputs.append(self.createFullOutputString(self.type_stack[0][0], self.current_variable_name, self.value_stack[0][0]))
 
     def setVariableName(self, var_name):
